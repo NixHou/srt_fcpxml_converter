@@ -2,6 +2,7 @@
 SRT & FCPXML CONVERTER
 REQUIREMENT: OpenCC (pip install opencc-python-reimplemented)
 AUTHOR: MICHAEL HONG
+Modify: Nix Hou
 """
 
 import xml.etree.ElementTree as ET
@@ -12,10 +13,8 @@ import argparse
 parser = argparse.ArgumentParser(description="Convert between .srt and .fcpxml files for subtitles creation.")
 parser.add_argument('-i', '--input', required=True, help="name for the input file (.srt or .fcpxml)")
 parser.add_argument('-o', '--output', required=True, help="name for the ouput file (.srt or .fcpxml)")
-parser.add_argument('-c', '--convert', 
-	help="(optional) to use OpenCC to convert between Simplified/Traditional Chinese. Please specify the OpenCC configurations (e.g., s2t, t2s)")
-parser.add_argument('-t', '--template', default='Template.xml',
-	help="(optional) to use a user-specific template file to generate .fcpxml. Default to 'Template.xml'")
+parser.add_argument('-t', '--template', default='Template.fcpxml',
+	help="(optional) to use a user-specific template file to generate .fcpxml. Default to 'Template.fcpxml'")
 parser.add_argument('-fr', '--framerate', default=29.97, type=float,
 	help='(optional) framerate should be set in the template. This argument provides a sanity check. Default to 29.97fps')
 parser.add_argument('--offset', type=float,
@@ -25,11 +24,6 @@ args = parser.parse_args()
 FILE_IN		 = args.input 
 FILE_OUT 	 = args.output
 XML_TEMPLATE = args.template
-
-cc = None
-if args.convert:
-	from opencc import OpenCC
-	cc = OpenCC(args.convert)
 
 framerate_tuple = (1001, 30000) # default to 29.97fps
 
@@ -65,8 +59,6 @@ def convert_srt_t(arr):
 		float(arr[2]) + float(arr[3]) / 1000.
 
 def convert_text(__str):
-	if cc:
-		return cc.convert(__str)
 	return __str
 
 ################
@@ -148,7 +140,7 @@ def process_output_fcpxml(data):
 
 	n_library = root[1]
 	n_event = n_library[0]
-	n_event.set('name', 'CC_XML')
+	n_event.set('name', 'Subtitle')
 	n_project = n_event[0]
 	n_project.set('name', event_name)
 
