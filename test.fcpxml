@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+
+<fcpxml version="1.10">
+    <resources>
+        <format id="r1" name="FFVideoFormat1080p2997" frameDuration="1001/30000s" width="1920" height="1080" colorSpace="1-1-1 (Rec. 709)" />
+        <effect id="r2" name="基本字幕" uid=".../Titles.localized/Bumper:Opener.localized/Basic Title.localized/Basic Title.moti" />
+    </resources>
+    <library>
+        <event name="Subtitle">
+            <project name="test">
+                <sequence format="r1" tcStart="0s" tcFormat="NDF">
+                    <spine>
+                        <gap name="Gap" offset="0s" duration="1799798/30000s" start="0s" /><title ref="r2" name="{1} This is 1st subtitle." offset="1799798/30000s" duration="3611608/30000s" start="1799798/30000s">
+                            <param name="展平" key="9999/999166631/999166633/2/351" value="1" />
+                            <param name="对齐" key="9999/999166631/999166633/2/354/999169573/401" value="1 (居中)" />
+                            <text>
+                                <text-style ref="ts1">This is 1st subtitle.</text-style>
+                            </text>
+                            <text-style-def id="ts1">
+                                <text-style font="Noto Sans SC" fontSize="42" fontFace="Regular" fontColor="1 1 1 1" shadowColor="0 0 0 0.75" shadowOffset="5 315" shadowBlurRadius="4" />
+                            </text-style-def>
+                            <adjust-transform position="0 -40.7407" />
+                        </title>
+                    <title ref="r2" name="{2} This is 2nd subtitle." offset="9311302/30000s" duration="9296287/30000s" start="9311302/30000s">
+                            <param name="展平" key="9999/999166631/999166633/2/351" value="1" />
+                            <param name="对齐" key="9999/999166631/999166633/2/354/999169573/401" value="1 (居中)" />
+                            <text>
+                                <text-style ref="ts2">This is 2nd subtitle.</text-style>
+                            </text>
+                            <text-style-def id="ts2">
+                                <text-style font="Noto Sans SC" fontSize="42" fontFace="Regular" fontColor="1 1 1 1" shadowColor="0 0 0 0.75" shadowOffset="5 315" shadowBlurRadius="4" />
+                            </text-style-def>
+                            <adjust-transform position="0 -40.7407" />
+                        </title>
+                    </spine>
+                </sequence>
+            </project>
+        </event>
+    </library>
+</fcpxml>
